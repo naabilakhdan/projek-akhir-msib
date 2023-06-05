@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/side.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body style="background: white;">
+    <div class="container">
+        <nav class="navbar">
+            <p class="header--logo">SidikPA</p>
+            <a href="index" class="button d-grid mx-auto">BACK</a>
+            <p class="header--logo" style="color: #111f4b;">Ancol Tide</p>
+        </nav>
+    </div>
+
+    <h1 class="section-title" style="font-family: 'Roboto Slab', serif;"><b>Prediksi Pasang Surut <br>Ancol
+            Jakarta</b></h1>
+    <img class="imgprediksi" src="../static/img/wncol-tide.png" alt="">
+    <hr class="hr2">
+
+    <form class="prediksi1">
+        <div class="input-container">
+            <h3>Prediction</h3>
+            <div class="inputtahun">
+                <label for="exampleInputTahun1">Masukan Tahun</label>
+                <br>
+                <input type="number" name="tahun" id="tahun" placeholder="Tahun">
+            </div>
+            <div class="inputbulan">
+                <label for="exampleInputTahun1">Masukan Bulan</label>
+                <br>
+                <input type="number" name="bulan" id="bulan" placeholder="Bulan">
+            </div>
+            <div class="inputhari">
+                <label for="exampleInputTahun1">Masukan Hari</label>
+                <br>
+                <input type="number" name="hari" id="hari" placeholder="Hari">
+            </div>
+            <div class="inputjam">
+                <label for="exampleInputTahun1">Masukan Jam</label>
+                <br>
+                <input type="number" name="jam" id="jam" placeholder="Jam">
+            </div>
+        </div>
+        <div class="btnpred">
+            <button type="submit" class="msger-send-btn">Submit</button>
+        </div>
+        <hr class="hr2">
+    </form>
+
+    <div class="result container" id="result"></div>
+
+
+    <!--footer-->
+    <section class="footer">
+        <div class="footer-1">
+            <ul style="list-style: none;" class="menu">
+                <li>
+                    <a href="/index"><b>Home</b></a>
+                </li>
+                <li>
+                    <a href="/about"><b>About</b></a>
+                </li>
+                <li>
+                    <a href="/prediksi"><b>Prediction</b></a>
+                </li>
+                <li>
+                    <a href="/team"><b>Team</b></a>
+                </li>
+                <li>
+                    <a href="/contact"><b>Contact</b></a>
+                </li>
+            </ul>
+        </div>
+        <p style="text-align: center; font-size: 16px;">
+            © Copyright Cerdas 2023
+        </p>
+    </section>
+    <!--footer -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const prediksi = document.querySelector(".prediksi1")
+        const tahun = document.getElementById('tahun')
+        const bulan = document.getElementById('bulan')
+        const hari = document.getElementById('hari')
+        const jam = document.getElementById('jam')
+        const result = document.getElementById('result')
+
+        prediksi.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const predT = tahun.value;
+            const predB = bulan.value;
+            const predH = hari.value;
+            const predJ = jam.value;
+            getPrediksi(predT, predB, predH, predJ)
+
+        })
+
+        function getPrediksi(year, month, day, hours) {
+            $.get("/result", {
+                tahun: year,
+                bulan: month,
+                hari: day,
+                jam: hours,
+            }).done(function (data) {
+                console.log(data);
+                addResult(data)
+            })
+        }
+
+        function addResult(tinggi) {
+            const getResult = `<p style="font-family: Source Code Pro, monospace; font-size: 16px; margin-left: 230px;"> Tinggi pasang surut yang diprediksi: <span style="text-align: center; border-radius: 0.25rem; background: #eeeeee; color: rgb(9, 171, 59);"> ${tinggi} </p> </span>`
+            console.log(result.innerHTML)
+            result.insertAdjacentHTML('beforeend', getResult)
+            setInterval(() => {
+                detik()
+            }, 10000);
+
+        }
+
+        function detik() {
+            location.reload()
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -261,6 +261,13 @@ body {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0), rgba(0, 0, 0, 0));
 }
 
+.hr2 {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
 /* contact */
 .location a:hover {
   color: rgb(255, 0, 0);
@@ -339,6 +346,49 @@ body {
 .phone h6:hover {
   color: #ff0000;
 }
+
+/* prediksi */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.input-container input {
+  width: 650px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+}
+
+.btnpred button {
+  margin: 10px 0 50px 445px;
+  width: 80px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0051ff;
+  color: white;
+  cursor: pointer;
+}
+
+.btnpred button:hover {
+  background-color: #4781ff;
+}
+
+.imgprediksi {
+  width: 750px;
+  height: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 50px;
+}
+
+
 
 /* footer */
 
